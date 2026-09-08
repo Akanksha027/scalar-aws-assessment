@@ -218,21 +218,13 @@ export function LoginPage() {
 
           <aside className={styles.promoPane} aria-label="Amazon Quick">
             <Image
-              src="/assets/aws-quick-banner.jpg"
-              alt=""
+              src="/image.png"
+              alt="Amazon Quick — Find answers instantly, automate repetitive work, and turn complex data into clear insights—all in one place."
               fill
               priority
               className={styles.promoImage}
               sizes="(max-width: 860px) 100vw, 460px"
             />
-            <div className={styles.promoCopy}>
-              <h2>Amazon Quick</h2>
-              <p>
-                Find answers instantly, automate repetitive work, and turn
-                complex data into clear insights—all in one place.
-              </p>
-              <a href="#">Get started free today →</a>
-            </div>
           </aside>
         </section>
       </main>

@@ -336,56 +336,13 @@
 .promoPane {
   position: relative;
   min-height: 560px;
-  background: #0b1220;
+  background: #121212;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
 }
 
 .promoImage {
   object-fit: cover;
-  object-position: center bottom;
-}
-
-.promoCopy {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 32px 28px 36px;
-  color: #fff;
-  background: linear-gradient(
-    180deg,
-    rgba(8, 12, 20, 0) 0%,
-    rgba(8, 12, 20, 0.55) 35%,
-    rgba(8, 12, 20, 0.82) 100%
-  );
-}
-
-.promoCopy h2 {
-  margin: 0 0 12px;
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-.promoCopy p {
-  margin: 0 0 18px;
-  font-size: 15px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.95);
-  max-width: 34ch;
-}
-
-.promoCopy a {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.promoCopy a:hover {
-  text-decoration: underline;
+  object-position: center center;
 }
 
 .footer {
@@ -439,9 +396,5 @@
     gap: 12px;
     flex-wrap: wrap;
     justify-content: flex-end;
-  }
-
-  .promoCopy h2 {
-    font-size: 28px;
   }
 }
