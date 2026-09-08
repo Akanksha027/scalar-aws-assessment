@@ -80,8 +80,9 @@
 }
 
 .logo {
-  width: 76px;
-  height: auto;
+  width: 84px;
+  height: 51px;
+  object-fit: contain;
 }
 
 .shell {
@@ -374,8 +375,11 @@
 }
 
 .promoImage {
+  display: block;
+  width: 570px;
+  height: 450px;
+  max-width: 100%;
   object-fit: fill;
-  object-position: center center;
 }
 
 .footer {

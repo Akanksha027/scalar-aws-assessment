@@ -70,8 +70,8 @@ export function LoginPage() {
         <Image
           src="/assets/aws-logo-dark.svg"
           alt="aws"
-          width={76}
-          height={30}
+          width={84}
+          height={51}
           priority
           className={styles.logo}
         />
