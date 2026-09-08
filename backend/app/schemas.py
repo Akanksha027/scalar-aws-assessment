@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, Generic, Literal, TypeVar
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
 
 T = TypeVar("T")
 
@@ -20,8 +20,8 @@ class Paginated(BaseModel, Generic[T]):
 
 
 class LoginRequest(BaseModel):
-    email: EmailStr
-    password: str
+    email: str = Field(min_length=3)
+    password: str = Field(min_length=1)
 
 
 class UserOut(BaseModel):
