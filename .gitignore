@@ -18,6 +18,10 @@ __pycache__/
 !.env.example
 *.pem
 
+# Local SQLite DB (regenerated on backend startup)
+backend/data/*.db
+backend/data/*.db-*
+
 # OS / IDE
 .DS_Store
 Thumbs.db

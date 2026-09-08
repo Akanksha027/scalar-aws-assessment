@@ -1,9 +1,5 @@
-# Deploy the FastAPI backend service from this monorepo.
-# In Railway UI: Settings → Root Directory = backend
-
 [build]
-builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
+builder = "NIXPACKS"
 
 [deploy]
 startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
