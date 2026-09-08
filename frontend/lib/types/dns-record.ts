@@ -6,6 +6,7 @@ export type DnsRecordType =
   | "NS"
   | "SOA"
   | "TXT"
+  | "PTR"
   | "SRV"
   | "CAA";
 
@@ -23,4 +24,5 @@ export type DnsRecord = {
   ttl: number | null;
   healthCheckId: string;
   evaluateTargetHealth: string;
+  isSystemRecord?: boolean;
 };

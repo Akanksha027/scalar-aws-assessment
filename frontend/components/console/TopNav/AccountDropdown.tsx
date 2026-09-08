@@ -1,5 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useAuth } from "@/lib/auth";
 import {
   ACCOUNT_MENU_LINKS,
   CONSOLE_ACCOUNT,
@@ -43,7 +46,28 @@ type AccountDropdownProps = {
  * AWS console account menu — free plan, account details, links, sign out.
  */
 export function AccountDropdown({ id }: AccountDropdownProps) {
+  const router = useRouter();
+  const { user, logout } = useAuth();
+  const [signingOut, setSigningOut] = useState(false);
   const { freePlan } = CONSOLE_ACCOUNT;
+
+  const accountId = user?.account_id ?? CONSOLE_ACCOUNT.accountId;
+  const displayName = user?.display_name ?? CONSOLE_ACCOUNT.displayName;
+  const accountIdFormatted =
+    accountId.length === 12
+      ? `${accountId.slice(0, 4)}-${accountId.slice(4, 8)}-${accountId.slice(8)}`
+      : accountId;
+
+  async function handleSignOut() {
+    if (signingOut) return;
+    setSigningOut(true);
+    try {
+      await logout();
+      router.replace("/login");
+    } finally {
+      setSigningOut(false);
+    }
+  }
 
   return (
     <div className={styles.dropdown} id={id} role="menu" aria-label="Account menu">
@@ -77,11 +101,11 @@ export function AccountDropdown({ id }: AccountDropdownProps) {
               type="button"
               className={styles.copyButton}
               aria-label="Copy account ID"
-              onClick={() => copyText(CONSOLE_ACCOUNT.accountId)}
+              onClick={() => copyText(accountId)}
             >
               <CopyIcon />
             </button>
-            <span>{CONSOLE_ACCOUNT.accountIdFormatted}</span>
+            <span>{accountIdFormatted}</span>
           </div>
         </div>
 
@@ -92,11 +116,11 @@ export function AccountDropdown({ id }: AccountDropdownProps) {
               type="button"
               className={styles.copyButton}
               aria-label="Copy account name"
-              onClick={() => copyText(CONSOLE_ACCOUNT.displayName)}
+              onClick={() => copyText(displayName)}
             >
               <CopyIcon />
             </button>
-            <span>{CONSOLE_ACCOUNT.displayName}</span>
+            <span>{displayName}</span>
           </div>
         </div>
 
@@ -128,8 +152,13 @@ export function AccountDropdown({ id }: AccountDropdownProps) {
         <button type="button" className={styles.multiSessionButton}>
           Turn on multi-session support
         </button>
-        <button type="button" className={styles.signOutButton}>
-          Sign out
+        <button
+          type="button"
+          className={styles.signOutButton}
+          disabled={signingOut}
+          onClick={() => void handleSignOut()}
+        >
+          {signingOut ? "Signing out…" : "Sign out"}
         </button>
       </div>
     </div>

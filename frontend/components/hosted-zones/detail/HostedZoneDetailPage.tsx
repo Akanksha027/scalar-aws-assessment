@@ -9,8 +9,7 @@ import Tabs from "@cloudscape-design/components/tabs";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ConsoleShell } from "@/components/console";
-import { listRecords } from "@/lib/mock/dns-records";
-import { getHostedZone } from "@/lib/mock/hosted-zones";
+import { api } from "@/lib/api";
 import type { DnsRecord } from "@/lib/types/dns-record";
 import type { HostedZone } from "@/lib/types/hosted-zone";
 import { HostedZoneDetailHeader } from "./HostedZoneDetailHeader";
@@ -18,29 +17,42 @@ import { HostedZoneDetailsExpandable } from "./HostedZoneDetailsExpandable";
 import { RecordsTable } from "./RecordsTable";
 import styles from "./HostedZoneDetailPage.module.css";
 
-/**
- * Hosted zone detail — records view matching AWS Route 53 after create.
- */
 export function HostedZoneDetailPage() {
   const params = useParams<{ id: string }>();
   const searchParams = useSearchParams();
   const router = useRouter();
   const zoneId = params.id;
 
-  const [zone, setZone] = useState<HostedZone | undefined>(() =>
-    getHostedZone(zoneId),
-  );
-  const [records, setRecords] = useState<DnsRecord[]>(() =>
-    listRecords(zoneId),
-  );
+  const [zone, setZone] = useState<HostedZone | null>(null);
+  const [records, setRecords] = useState<DnsRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const [showCreatedFlash, setShowCreatedFlash] = useState(
     () => searchParams.get("created") === "1",
   );
 
-  useEffect(() => {
-    setZone(getHostedZone(zoneId));
-    setRecords(listRecords(zoneId));
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [z, recs] = await Promise.all([
+        api.getZone(zoneId),
+        api.listRecords(zoneId, { page: 1, page_size: 100 }),
+      ]);
+      setZone(z);
+      setRecords(recs.items);
+      setNotFound(false);
+    } catch {
+      setNotFound(true);
+      setZone(null);
+      setRecords([]);
+    } finally {
+      setLoading(false);
+    }
   }, [zoneId]);
+
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
 
   useEffect(() => {
     if (searchParams.get("created") === "1") {
@@ -48,11 +60,6 @@ export function HostedZoneDetailPage() {
       router.replace(`/hosted-zones/${zoneId}`, { scroll: false });
     }
   }, [searchParams, zoneId, router]);
-
-  const refresh = useCallback(() => {
-    setZone(getHostedZone(zoneId));
-    setRecords(listRecords(zoneId));
-  }, [zoneId]);
 
   const flashItems: FlashbarProps.MessageDefinition[] = useMemo(() => {
     if (!showCreatedFlash || !zone) return [];
@@ -70,7 +77,7 @@ export function HostedZoneDetailPage() {
     ];
   }, [showCreatedFlash, zone]);
 
-  if (!zone) {
+  if (notFound && !loading) {
     return (
       <ConsoleShell
         breadcrumbs={
@@ -100,7 +107,10 @@ export function HostedZoneDetailPage() {
           items={[
             { text: "Route 53", href: "/hosted-zones" },
             { text: "Hosted zones", href: "/hosted-zones" },
-            { text: zone.name, href: `/hosted-zones/${zone.id}` },
+            {
+              text: zone?.name ?? zoneId,
+              href: `/hosted-zones/${zoneId}`,
+            },
           ]}
           ariaLabel="Breadcrumbs"
         />
@@ -109,9 +119,11 @@ export function HostedZoneDetailPage() {
       <div className={styles.page}>
         {flashItems.length > 0 ? <Flashbar items={flashItems} /> : null}
 
-        <HostedZoneDetailHeader zone={zone} />
+        {zone ? <HostedZoneDetailHeader zone={zone} /> : null}
 
-        <HostedZoneDetailsExpandable zone={zone} />
+        {zone ? (
+          <HostedZoneDetailsExpandable zone={zone} records={records} />
+        ) : null}
 
         <Tabs
           tabs={[
@@ -119,7 +131,13 @@ export function HostedZoneDetailPage() {
               id: "records",
               label: `Records (${records.length})`,
               content: (
-                <RecordsTable records={records} onRefresh={refresh} />
+                <RecordsTable
+                  zoneId={zoneId}
+                  zoneName={zone?.name ?? ""}
+                  records={records}
+                  loading={loading}
+                  onRefresh={() => void refresh()}
+                />
               ),
             },
             {

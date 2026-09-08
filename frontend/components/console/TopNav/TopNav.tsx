@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
+import { useAuth } from "@/lib/auth";
 import { CONSOLE_ACCOUNT } from "@/lib/constants/console";
 import { AccountDropdown } from "./AccountDropdown";
 import styles from "./TopNav.module.css";
@@ -176,6 +177,9 @@ export function TopNav() {
   const [accountOpen, setAccountOpen] = useState(false);
   const accountMenuRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
+  const { user } = useAuth();
+  const displayName = user?.display_name ?? CONSOLE_ACCOUNT.displayName;
+  const accountId = user?.account_id ?? CONSOLE_ACCOUNT.accountId;
 
   useEffect(() => {
     if (!accountOpen) return;
@@ -296,10 +300,10 @@ export function TopNav() {
               aria-controls={menuId}
               onClick={() => setAccountOpen((open) => !open)}
             >
-              {CONSOLE_ACCOUNT.displayName} ({CONSOLE_ACCOUNT.accountId})
+              {displayName} ({accountId})
               <Caret pointUp={accountOpen} />
             </button>
-            <span className={styles.accountUsername}>{CONSOLE_ACCOUNT.displayName}</span>
+            <span className={styles.accountUsername}>{displayName}</span>
           </div>
 
           <button

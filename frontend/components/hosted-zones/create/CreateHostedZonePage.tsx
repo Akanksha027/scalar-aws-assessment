@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ConsoleShell } from "@/components/console";
 import { awsPrimaryButtonStyle } from "@/lib/constants/button-styles";
-import { createHostedZone } from "@/lib/mock/hosted-zones";
+import { api } from "@/lib/api";
 import type { HostedZoneType } from "@/lib/types/hosted-zone";
 import {
   HostedZoneConfigSection,
@@ -52,12 +52,22 @@ export function CreateHostedZonePage() {
     setCreatingName(trimmed);
 
     window.setTimeout(() => {
-      const zone = createHostedZone({
-        name: trimmed,
-        description,
-        type: zoneType,
-      });
-      router.push(`/hosted-zones/${zone.id}?created=1`);
+      void (async () => {
+        try {
+          const zone = await api.createZone({
+            domain_name: trimmed,
+            description,
+            type: zoneType,
+          });
+          router.push(`/hosted-zones/${zone.id}?created=1`);
+        } catch (error) {
+          setSubmitting(false);
+          setCreatingName(null);
+          setDomainError(
+            error instanceof Error ? error.message : "Failed to create hosted zone.",
+          );
+        }
+      })();
     }, CREATE_DELAY_MS);
   };
 

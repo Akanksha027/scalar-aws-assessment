@@ -5,12 +5,13 @@ import Button from "@cloudscape-design/components/button";
 import ColumnLayout from "@cloudscape-design/components/column-layout";
 import ExpandableSection from "@cloudscape-design/components/expandable-section";
 import SpaceBetween from "@cloudscape-design/components/space-between";
+import type { DnsRecord } from "@/lib/types/dns-record";
 import type { HostedZone } from "@/lib/types/hosted-zone";
-import { listRecords } from "@/lib/mock/dns-records";
 import styles from "./HostedZoneDetailPage.module.css";
 
 type HostedZoneDetailsExpandableProps = {
   zone: HostedZone;
+  records?: DnsRecord[];
 };
 
 function DetailField({
@@ -28,11 +29,17 @@ function DetailField({
   );
 }
 
+function nameServersFromRecords(records: DnsRecord[] | undefined): string[] {
+  if (!records?.length) return [];
+  const nsRecord = records.find((r) => r.type === "NS");
+  return nsRecord?.value.split("\n").map((v) => v.trim()).filter(Boolean) ?? [];
+}
+
 export function HostedZoneDetailsExpandable({
   zone,
+  records,
 }: HostedZoneDetailsExpandableProps) {
-  const nsRecord = listRecords(zone.id).find((r) => r.type === "NS");
-  const nameServers = nsRecord?.value.split("\n").filter(Boolean) ?? [];
+  const nameServers = nameServersFromRecords(records);
 
   return (
     <ExpandableSection
