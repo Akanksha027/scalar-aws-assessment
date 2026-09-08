@@ -1,6 +1,6 @@
 .page {
   --aws-blue: #0073bb;
-  --aws-link: #0066c0;
+  --aws-link: #006ce0;
   --aws-orange: #ff9900;
   --aws-text: #0f1419;
   --aws-muted: #545b64;
@@ -41,15 +41,21 @@
   border: none;
   padding: 0;
   margin: 0;
-  color: var(--aws-link);
+  color: #006ce0;
   font: inherit;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 17.6px;
+  height: 17.6px;
+  min-width: 115.21px;
+  width: max-content;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 4px;
   text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .topLinks a:hover,
@@ -87,9 +93,9 @@
 }
 
 .columns {
-  width: min(980px, 100%);
+  width: min(1048px, 100%);
   display: grid;
-  grid-template-columns: minmax(0, 430px) minmax(0, 430px);
+  grid-template-columns: minmax(0, 430px) 570px;
   justify-content: center;
   gap: 48px;
   align-items: start;
@@ -356,10 +362,10 @@
 
 .promoPane {
   position: relative;
-  width: 100%;
-  min-height: 520px;
-  height: 100%;
-  align-self: stretch;
+  width: 570px;
+  height: 450px;
+  min-height: 450px;
+  flex-shrink: 0;
   border-radius: 16px;
   overflow: hidden;
   background: #121212;
@@ -368,7 +374,7 @@
 }
 
 .promoImage {
-  object-fit: cover;
+  object-fit: fill;
   object-position: center center;
 }
 
@@ -405,13 +411,16 @@
 @media (max-width: 900px) {
   .columns {
     grid-template-columns: 1fr;
-    max-width: 430px;
+    max-width: 570px;
     gap: 24px;
   }
 
   .promoPane {
-    min-height: 280px;
-    order: -1;
+    width: 100%;
+    max-width: 570px;
+    height: auto;
+    aspect-ratio: 570 / 450;
+    min-height: 0;
   }
 
   .signInCard {

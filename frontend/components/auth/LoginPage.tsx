@@ -222,10 +222,11 @@ export function LoginPage() {
             <Image
               src="/image.png"
               alt="Amazon Quick — Find answers instantly, automate repetitive work, and turn complex data into clear insights—all in one place."
-              fill
+              width={570}
+              height={450}
               priority
               className={styles.promoImage}
-              sizes="(max-width: 900px) 100vw, 420px"
+              sizes="570px"
             />
           </aside>
         </div>
