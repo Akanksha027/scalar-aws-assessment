@@ -5,7 +5,7 @@
   --aws-text: #0f1419;
   --aws-muted: #545b64;
   --aws-border: #aab7b8;
-  --aws-page: #f1efec;
+  --aws-page: #ffffff;
 
   position: relative;
   min-height: 100vh;
@@ -13,11 +13,8 @@
   flex-direction: column;
   color: var(--aws-text);
   font-family: "Amazon Ember", "Helvetica Neue", Arial, sans-serif;
-  background-color: var(--aws-page);
-  background-image: url("/assets/aws-login-bg.jpg");
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
+  background-color: #ffffff;
+  background-image: none;
   -webkit-font-smoothing: antialiased;
 }
 
