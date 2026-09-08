@@ -70,142 +70,144 @@ export function LoginPage() {
         <Image
           src="/assets/aws-logo-dark.svg"
           alt="aws"
-          width={80}
-          height={32}
+          width={76}
+          height={30}
           priority
           className={styles.logo}
         />
       </div>
 
       <main className={styles.shell}>
-        <section className={styles.card} aria-label="Sign in">
-          <div className={styles.formPane}>
-            <h1 className={styles.title}>Sign In</h1>
-            <p className={styles.subtitle}>
-              Access your AWS account by <a href="#">user type</a>.
-            </p>
+        <div className={styles.columns}>
+          <div className={styles.leftCol}>
+            <section className={styles.signInCard} aria-label="Sign in">
+              <h1 className={styles.title}>Sign In</h1>
+              <p className={styles.subtitle}>
+                Access your AWS account by <a href="#">user type</a>.
+              </p>
 
-            <p className={styles.demoCred}>
-              Demo: <strong>admin@example.com</strong> /{" "}
-              <strong>password123</strong>
-            </p>
+              <p className={styles.demoCred}>
+                Demo: <strong>admin@example.com</strong> /{" "}
+                <strong>password123</strong>
+              </p>
 
-            <p className={styles.userTypeLabel}>
-              User type (<a href="#">not sure?</a>)
-            </p>
+              <p className={styles.userTypeLabel}>
+                User type (<a href="#">not sure?</a>)
+              </p>
 
-            <div className={styles.radioGroup} role="radiogroup">
-              <button
-                type="button"
-                role="radio"
-                aria-checked={userType === "root"}
-                className={`${styles.radioCard} ${
-                  userType === "root" ? styles.radioCardSelected : ""
-                }`}
-                onClick={() => setUserType("root")}
-              >
-                <span className={styles.radioDot} aria-hidden />
-                <span className={styles.radioText}>
-                  <strong>Root user</strong>
-                  <span>
-                    Account owner that performs tasks requiring unrestricted
-                    access.
-                  </span>
-                </span>
-              </button>
-
-              <button
-                type="button"
-                role="radio"
-                aria-checked={userType === "iam"}
-                className={`${styles.radioCard} ${
-                  userType === "iam" ? styles.radioCardSelected : ""
-                }`}
-                onClick={() => setUserType("iam")}
-              >
-                <span className={styles.radioDot} aria-hidden />
-                <span className={styles.radioText}>
-                  <strong>IAM user</strong>
-                  <span>
-                    User within an account that performs daily tasks.
-                  </span>
-                </span>
-              </button>
-            </div>
-
-            {error ? <div className={styles.error}>{error}</div> : null}
-
-            {step === "email" ? (
-              <form onSubmit={handleNext} className={styles.form}>
-                <label className={styles.label} htmlFor="login-email">
-                  Email address
-                </label>
-                <input
-                  id="login-email"
-                  className={styles.input}
-                  type="email"
-                  autoComplete="username"
-                  placeholder="username@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button type="submit" className={styles.primaryBtn}>
-                  Next
-                </button>
-                <div className={styles.orRow}>
-                  <span>OR</span>
-                </div>
-                <button type="button" className={styles.secondaryBtn}>
-                  New to AWS? Sign up
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleSignIn} className={styles.form}>
-                <label className={styles.label} htmlFor="login-email-2">
-                  Email address
-                </label>
-                <input
-                  id="login-email-2"
-                  className={styles.input}
-                  type="email"
-                  autoComplete="username"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <label className={styles.label} htmlFor="login-password">
-                  Password
-                </label>
-                <input
-                  id="login-password"
-                  className={styles.input}
-                  type="password"
-                  autoComplete="current-password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className={styles.primaryBtn}
-                  disabled={loading}
-                >
-                  {loading ? "Signing in…" : "Sign in"}
-                </button>
-                <div className={styles.orRow}>
-                  <span>OR</span>
-                </div>
+              <div className={styles.radioGroup} role="radiogroup">
                 <button
                   type="button"
-                  className={styles.secondaryBtn}
-                  onClick={() => {
-                    setStep("email");
-                    setError(null);
-                  }}
+                  role="radio"
+                  aria-checked={userType === "root"}
+                  className={`${styles.radioCard} ${
+                    userType === "root" ? styles.radioCardSelected : ""
+                  }`}
+                  onClick={() => setUserType("root")}
                 >
-                  Back
+                  <span className={styles.radioDot} aria-hidden />
+                  <span className={styles.radioText}>
+                    <strong>Root user</strong>
+                    <span>
+                      Account owner that performs tasks requiring unrestricted
+                      access.
+                    </span>
+                  </span>
                 </button>
-              </form>
-            )}
+
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={userType === "iam"}
+                  className={`${styles.radioCard} ${
+                    userType === "iam" ? styles.radioCardSelected : ""
+                  }`}
+                  onClick={() => setUserType("iam")}
+                >
+                  <span className={styles.radioDot} aria-hidden />
+                  <span className={styles.radioText}>
+                    <strong>IAM user</strong>
+                    <span>
+                      User within an account that performs daily tasks.
+                    </span>
+                  </span>
+                </button>
+              </div>
+
+              {error ? <div className={styles.error}>{error}</div> : null}
+
+              {step === "email" ? (
+                <form onSubmit={handleNext} className={styles.form}>
+                  <label className={styles.label} htmlFor="login-email">
+                    Email address
+                  </label>
+                  <input
+                    id="login-email"
+                    className={styles.input}
+                    type="email"
+                    autoComplete="username"
+                    placeholder="username@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <button type="submit" className={styles.primaryBtn}>
+                    Next
+                  </button>
+                  <div className={styles.orRow}>
+                    <span>OR</span>
+                  </div>
+                  <button type="button" className={styles.secondaryBtn}>
+                    New to AWS? Sign up
+                  </button>
+                </form>
+              ) : (
+                <form onSubmit={handleSignIn} className={styles.form}>
+                  <label className={styles.label} htmlFor="login-email-2">
+                    Email address
+                  </label>
+                  <input
+                    id="login-email-2"
+                    className={styles.input}
+                    type="email"
+                    autoComplete="username"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <label className={styles.label} htmlFor="login-password">
+                    Password
+                  </label>
+                  <input
+                    id="login-password"
+                    className={styles.input}
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className={styles.primaryBtn}
+                    disabled={loading}
+                  >
+                    {loading ? "Signing in…" : "Sign in"}
+                  </button>
+                  <div className={styles.orRow}>
+                    <span>OR</span>
+                  </div>
+                  <button
+                    type="button"
+                    className={styles.secondaryBtn}
+                    onClick={() => {
+                      setStep("email");
+                      setError(null);
+                    }}
+                  >
+                    Back
+                  </button>
+                </form>
+              )}
+            </section>
 
             <p className={styles.legal}>
               By continuing, you agree to{" "}
@@ -223,17 +225,21 @@ export function LoginPage() {
               fill
               priority
               className={styles.promoImage}
-              sizes="(max-width: 860px) 100vw, 460px"
+              sizes="(max-width: 900px) 100vw, 420px"
             />
           </aside>
-        </section>
+        </div>
       </main>
 
       <footer className={styles.footer}>
         © 2026 Amazon Web Services, Inc. or its affiliates. All rights reserved.
       </footer>
 
-      <button type="button" className={styles.terminalTab} aria-label="CloudShell">
+      <button
+        type="button"
+        className={styles.terminalTab}
+        aria-label="CloudShell"
+      >
         &gt;_&lt;
       </button>
     </div>
