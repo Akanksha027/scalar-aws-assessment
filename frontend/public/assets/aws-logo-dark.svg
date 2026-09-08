@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 32" fill="none" role="img" aria-label="AWS">
+  <text
+    x="2"
+    y="20"
+    font-family="Amazon Ember, Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-size="22"
+    font-weight="700"
+    fill="#232F3E"
+    letter-spacing="-0.5"
+  >aws</text>
+  <path
+    fill="#FF9900"
+    d="M18 24.5c6.2 3.2 13.4 4.9 20.5 4.9 6.8 0 13.6-1.5 19.7-4.5.6-.3 1.1.3.6.8-5.3 4.5-12.4 6.9-20.1 6.9-7.5 0-14.8-2.2-20.9-6.3-.5-.4-.1-1.1.2-1.8z"
+  />
+  <path
+    fill="#FF9900"
+    d="M54.2 22.8c-.5-.6-3.1-.3-4.3-.1-.4.05-.4-.3-.1-.5 2.1-1.5 5.5-1 6-.5.5.5-.1 3.9-2.1 5.5-.3.25-.6.1-.45-.2.4-1.1 1.4-3.6.95-4.2z"
+  />
+</svg>

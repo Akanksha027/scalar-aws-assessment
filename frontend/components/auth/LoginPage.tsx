@@ -1,31 +1,36 @@
 "use client";
 
-import {
-  Alert,
-  Box,
-  Button,
-  Container,
-  Form,
-  FormField,
-  Header,
-  Input,
-  SpaceBetween,
-} from "@cloudscape-design/components";
+import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { ApiError } from "@/lib/api/client";
 import styles from "./LoginPage.module.css";
 
+type UserType = "root" | "iam";
+type Step = "email" | "password";
+
 export function LoginPage() {
   const { login } = useAuth();
   const router = useRouter();
+  const [userType, setUserType] = useState<UserType>("root");
+  const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("admin@example.com");
   const [password, setPassword] = useState("password123");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (event?: FormEvent) => {
+  const handleNext = (event?: FormEvent) => {
+    event?.preventDefault();
+    if (!email.trim()) {
+      setError("Enter your email address");
+      return;
+    }
+    setError(null);
+    setStep("password");
+  };
+
+  const handleSignIn = async (event?: FormEvent) => {
     event?.preventDefault();
     setLoading(true);
     setError(null);
@@ -47,61 +52,202 @@ export function LoginPage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.topNav}>
-        <span className={styles.logo}>aws</span>
+      <header className={styles.topBar}>
+        <div className={styles.topLinks}>
+          <a href="#">Provide feedback</a>
+          <button type="button">
+            Multi-session disabled
+            <Caret />
+          </button>
+          <button type="button">
+            English
+            <Caret />
+          </button>
+        </div>
+      </header>
+
+      <div className={styles.logoWrap}>
+        <Image
+          src="/assets/aws-logo-dark.svg"
+          alt="aws"
+          width={80}
+          height={32}
+          priority
+          className={styles.logo}
+        />
       </div>
-      <div className={styles.card}>
-        <form onSubmit={onSubmit}>
-          <Form
-            actions={
-              <Button
-                variant="primary"
-                loading={loading}
-                onClick={() => void onSubmit()}
+
+      <main className={styles.shell}>
+        <section className={styles.card} aria-label="Sign in">
+          <div className={styles.formPane}>
+            <h1 className={styles.title}>Sign In</h1>
+            <p className={styles.subtitle}>
+              Access your AWS account by <a href="#">user type</a>.
+            </p>
+
+            <p className={styles.demoCred}>
+              Demo: <strong>admin@example.com</strong> /{" "}
+              <strong>password123</strong>
+            </p>
+
+            <p className={styles.userTypeLabel}>
+              User type (<a href="#">not sure?</a>)
+            </p>
+
+            <div className={styles.radioGroup} role="radiogroup">
+              <button
+                type="button"
+                role="radio"
+                aria-checked={userType === "root"}
+                className={`${styles.radioCard} ${
+                  userType === "root" ? styles.radioCardSelected : ""
+                }`}
+                onClick={() => setUserType("root")}
               >
-                Sign in
-              </Button>
-            }
-          >
-            <Container
-              header={
-                <Header
-                  variant="h1"
-                  description="Route 53 Clone — mocked authentication"
+                <span className={styles.radioDot} aria-hidden />
+                <span className={styles.radioText}>
+                  <strong>Root user</strong>
+                  <span>
+                    Account owner that performs tasks requiring unrestricted
+                    access.
+                  </span>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                role="radio"
+                aria-checked={userType === "iam"}
+                className={`${styles.radioCard} ${
+                  userType === "iam" ? styles.radioCardSelected : ""
+                }`}
+                onClick={() => setUserType("iam")}
+              >
+                <span className={styles.radioDot} aria-hidden />
+                <span className={styles.radioText}>
+                  <strong>IAM user</strong>
+                  <span>
+                    User within an account that performs daily tasks.
+                  </span>
+                </span>
+              </button>
+            </div>
+
+            {error ? <div className={styles.error}>{error}</div> : null}
+
+            {step === "email" ? (
+              <form onSubmit={handleNext} className={styles.form}>
+                <label className={styles.label} htmlFor="login-email">
+                  Email address
+                </label>
+                <input
+                  id="login-email"
+                  className={styles.input}
+                  type="email"
+                  autoComplete="username"
+                  placeholder="username@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button type="submit" className={styles.primaryBtn}>
+                  Next
+                </button>
+                <div className={styles.orRow}>
+                  <span>OR</span>
+                </div>
+                <button type="button" className={styles.secondaryBtn}>
+                  New to AWS? Sign up
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleSignIn} className={styles.form}>
+                <label className={styles.label} htmlFor="login-email-2">
+                  Email address
+                </label>
+                <input
+                  id="login-email-2"
+                  className={styles.input}
+                  type="email"
+                  autoComplete="username"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <label className={styles.label} htmlFor="login-password">
+                  Password
+                </label>
+                <input
+                  id="login-password"
+                  className={styles.input}
+                  type="password"
+                  autoComplete="current-password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className={styles.primaryBtn}
+                  disabled={loading}
                 >
-                  Sign in
-                </Header>
-              }
-            >
-              <SpaceBetween size="l">
-                {error ? <Alert type="error">{error}</Alert> : null}
-                <Alert type="info">
-                  Demo credentials: <b>admin@example.com</b> /{" "}
-                  <b>password123</b>
-                </Alert>
-                <FormField label="Email">
-                  <Input
-                    value={email}
-                    type="email"
-                    onChange={({ detail }) => setEmail(detail.value)}
-                  />
-                </FormField>
-                <FormField label="Password">
-                  <Input
-                    value={password}
-                    type="password"
-                    onChange={({ detail }) => setPassword(detail.value)}
-                  />
-                </FormField>
-                <Box color="text-body-secondary" fontSize="body-s">
-                  IAM, Organizations, and Billing are mocked for this
-                  assessment.
-                </Box>
-              </SpaceBetween>
-            </Container>
-          </Form>
-        </form>
-      </div>
+                  {loading ? "Signing in…" : "Sign in"}
+                </button>
+                <div className={styles.orRow}>
+                  <span>OR</span>
+                </div>
+                <button
+                  type="button"
+                  className={styles.secondaryBtn}
+                  onClick={() => {
+                    setStep("email");
+                    setError(null);
+                  }}
+                >
+                  Back
+                </button>
+              </form>
+            )}
+
+            <p className={styles.legal}>
+              By continuing, you agree to{" "}
+              <a href="#">AWS Customer Agreement</a> or other agreement for AWS
+              services, and the <a href="#">Privacy Notice</a>. This site uses
+              essential cookies. See our <a href="#">Cookie Notice</a> for more
+              information.
+            </p>
+          </div>
+
+          <aside className={styles.promoPane} aria-label="Amazon Quick">
+            <Image
+              src="/assets/aws-quick-banner.jpg"
+              alt=""
+              fill
+              priority
+              className={styles.promoImage}
+              sizes="(max-width: 860px) 100vw, 460px"
+            />
+            <div className={styles.promoCopy}>
+              <h2>Amazon Quick</h2>
+              <p>
+                Find answers instantly, automate repetitive work, and turn
+                complex data into clear insights—all in one place.
+              </p>
+              <a href="#">Get started free today →</a>
+            </div>
+          </aside>
+        </section>
+      </main>
+
+      <footer className={styles.footer}>
+        © 2026 Amazon Web Services, Inc. or its affiliates. All rights reserved.
+      </footer>
+
+      <button type="button" className={styles.terminalTab} aria-label="CloudShell">
+        &gt;_&lt;
+      </button>
     </div>
   );
+}
+
+function Caret() {
+  return <span className={styles.caret} aria-hidden />;
 }
