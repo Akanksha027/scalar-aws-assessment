@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+@media (max-width: 767px) {
+  /* Keep title + actions on one flowing row when possible; allow wrap if needed */
+  .actions {
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,60 @@
+/**
+ * AWS Console visual tokens — tuned to match Route 53 screenshots.
+ */
+:root {
+  --aws-header-bg: #151d26;
+  --aws-header-hover: #2a3441;
+  --aws-header-search-bg: #0f141a;
+  --aws-header-search-border: #3f4b5b;
+  --aws-header-account-bg: #2a3441;
+  --aws-footer-bg: #151d26;
+  --aws-orange: #ff9903;
+  --aws-orange-hover: #ec7211;
+  --aws-orange-active: #eb5f07;
+  --aws-link: #0972d3;
+  --aws-link-hover: #033a70;
+  --aws-border: #e9ebed;
+  --aws-text: #0f141a;
+  --aws-text-secondary: #5f6b7a;
+  --aws-nav-active: #0972d3;
+  --aws-page-bg: #ffffff;
+  --aws-sidebar-width: 280px;
+
+  /* Cloudscape primary button hashed tokens → #ff9903 + black text */
+  --color-background-button-primary-default-emr769: #ff9903;
+  --color-background-button-primary-hover-979qcq: #ec7211;
+  --color-background-button-primary-active-mulwvt: #eb5f07;
+  --color-border-button-primary-default-f7dp5z: #ff9903;
+  --color-border-button-primary-hover-38r9qu: #ec7211;
+  --color-border-button-primary-active-lupau4: #eb5f07;
+  --color-text-button-primary-default-2i01k6: #16191f;
+  --color-text-button-primary-hover-xtd6ag: #16191f;
+  --color-text-button-primary-active-dkwkja: #16191f;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--aws-page-bg);
+  color: var(--aws-text);
+  font-family:
+    "Amazon Ember",
+    "Helvetica Neue",
+    Roboto,
+    Arial,
+    sans-serif;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--aws-link);
+}

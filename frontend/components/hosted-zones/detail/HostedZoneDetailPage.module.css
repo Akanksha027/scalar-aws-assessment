@@ -1,0 +1,92 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
+  padding-bottom: 24px;
+}
+
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.zoneTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #0f141a;
+  white-space: nowrap;
+}
+
+.detailValue {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #0f141a;
+  word-break: break-word;
+}
+
+.nameServerList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nameServerList li {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recordsHint {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #5f6b7a;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.filterSearch {
+  flex: 1 1 280px;
+  min-width: 200px;
+}
+
+.filterRow :global([class*="awsui_root"]) {
+  min-width: 120px;
+}
+
+.recordValue {
+  white-space: pre-wrap;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (max-width: 767px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterRow :global([class*="awsui_root"]) {
+    flex: 1 1 100%;
+  }
+}

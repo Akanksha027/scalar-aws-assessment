@@ -1,0 +1,82 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
+  margin: -16px -20px -24px;
+  padding: 20px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.sectionDescription {
+  margin: 0;
+  color: #5f6b7a;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.actionsBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding-top: 4px;
+}
+
+/* Faded grey create button while zone is being created (matches AWS). */
+.createButtonLoading,
+.createButtonLoading:disabled,
+.createButtonLoading[aria-disabled="true"] {
+  background: #e9ebed !important;
+  background-color: #e9ebed !important;
+  border-color: #e9ebed !important;
+  color: #5f6b7a !important;
+  opacity: 1 !important;
+  cursor: default !important;
+}
+
+.descriptionMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.tagsEmpty {
+  margin: 4px 0 8px;
+  font-size: 14px;
+  color: #5f6b7a;
+}
+
+.tagRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+@media (max-width: 767px) {
+  .page {
+    margin: -12px -12px -16px;
+    padding: 12px;
+  }
+
+  .actionsBar {
+    justify-content: stretch;
+  }
+
+  .actionsBar > * {
+    flex: 1;
+  }
+
+  .tagRow {
+    grid-template-columns: 1fr;
+  }
+}

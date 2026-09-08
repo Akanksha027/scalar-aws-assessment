@@ -1,0 +1,119 @@
+.strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 16px 0 12px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--aws-border);
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #0972d3;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.hamburger:hover {
+  background: #033d8b;
+}
+
+.hamburgerLines {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  width: 12px;
+}
+
+.hamburgerLines span {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 1px;
+}
+
+.breadcrumbs {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.toolButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #5f6b7a;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toolButton:hover {
+  background: #f2f3f3;
+  color: #0f141a;
+}
+
+.toolButtonActive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: #f2f3f3;
+  color: #0972d3;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toolButtonActive:hover {
+  background: #e9ebed;
+}
+
+@media (max-width: 767px) {
+  .strip {
+    min-height: 40px;
+    padding: 0 10px 0 8px;
+    gap: 8px;
+  }
+
+  .left {
+    gap: 8px;
+  }
+
+  .breadcrumbs {
+    overflow: hidden;
+  }
+}

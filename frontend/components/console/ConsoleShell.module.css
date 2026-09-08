@@ -1,0 +1,153 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--aws-page-bg);
+}
+
+/**
+ * Row under the breadcrumb strip: sidebar | content [| tools]
+ */
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+}
+
+.sidebar {
+  width: var(--aws-sidebar-width);
+  flex-shrink: 0;
+  border-right: 1px solid var(--aws-border);
+  overflow: auto;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  /* Match Cloudscape SideNavigation link text inset; sit lower toward the list */
+  padding: 16px 4px 6px 28px;
+  flex-shrink: 0;
+}
+
+.sidebarTitle {
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  line-height: 22px;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  color: #0f141a;
+  text-decoration: none;
+}
+
+.sidebarTitle:hover {
+  color: #0972d3;
+}
+
+.collapseButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: #5f6b7a;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.collapseButton:hover {
+  background: #f2f3f3;
+  color: #0f141a;
+}
+
+.sidebarNav {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  /* Pull list up slightly so title sits closer to Dashboard */
+  margin-top: -2px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  background: #ffffff;
+  padding: 16px 20px 24px;
+}
+
+.contentForm {
+  background: #f2f3f3;
+}
+
+.tools {
+  width: 300px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--aws-border);
+  overflow: auto;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.desktopFooter {
+  flex-shrink: 0;
+}
+
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+
+  .sidebarDrawer {
+    display: flex;
+    position: fixed;
+    top: 88px; /* top nav 48 + breadcrumb ~40 */
+    left: 0;
+    bottom: 0;
+    z-index: 80;
+    width: min(280px, 86vw);
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.18);
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 88px 0 0 0;
+    z-index: 70;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: rgba(15, 20, 26, 0.45);
+    cursor: pointer;
+  }
+
+  .content {
+    padding: 12px 12px 16px;
+  }
+
+  .tools {
+    display: none;
+  }
+
+  .desktopFooter {
+    display: none;
+  }
+}

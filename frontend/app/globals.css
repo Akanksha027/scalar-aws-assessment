@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@import "@cloudscape-design/global-styles/index.css";
+@import "../styles/aws-tokens.css";
+
+/* Utility used by TopNav fallback */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/*
+ * AWS Create hosted zone / primary CTA:
+ * solid #ff9903 with black text (matches Console screenshot).
+ */
+button[class*="variant-primary"]:not([disabled]) {
+  background: #ff9903 !important;
+  background-color: #ff9903 !important;
+  border-color: #ff9903 !important;
+  color: #16191f !important;
+}
+
+button[class*="variant-primary"]:not([disabled]):hover {
+  background: #ec7211 !important;
+  background-color: #ec7211 !important;
+  border-color: #ec7211 !important;
+  color: #16191f !important;
+}
+
+button[class*="variant-primary"]:not([disabled]):active {
+  background: #eb5f07 !important;
+  background-color: #eb5f07 !important;
+  border-color: #eb5f07 !important;
+  color: #16191f !important;
+}
+
+/* Disabled / loading primary — faded grey like AWS create-in-progress */
+button[class*="variant-primary"][disabled],
+button[class*="variant-primary"][aria-disabled="true"] {
+  background: #e9ebed !important;
+  background-color: #e9ebed !important;
+  border-color: #e9ebed !important;
+  color: #5f6b7a !important;
+  opacity: 1 !important;
+}
+
+/**
+ * Side nav "New" marker — blue dotted underline text, not a solid badge.
+ */
+.aws-nav-new {
+  color: #0972d3;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow: hidden;
+  }
+}

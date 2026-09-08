@@ -1,0 +1,67 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+  padding-bottom: 56px;
+}
+
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.infoText {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #5f6b7a;
+}
+
+.selectionBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 0 16px;
+  background: #ffffff;
+  border-top: 1px solid #e9ebed;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+  color: #0f141a;
+}
+
+.selectionChevron {
+  color: #5f6b7a;
+}
+
+@media (max-width: 767px) {
+  .page {
+    gap: 10px;
+    padding-bottom: 52px;
+  }
+
+  .selectionBar {
+    display: flex;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actions :global(button) {
+    flex-shrink: 0;
+  }
+}

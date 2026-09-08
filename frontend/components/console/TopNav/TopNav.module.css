@@ -1,0 +1,382 @@
+.topNav {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 12px 0 4px;
+  background: var(--aws-header-bg);
+  color: #f1f3f3;
+  flex-shrink: 0;
+  z-index: 1000;
+  gap: 0;
+  overflow: visible;
+  position: relative;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 12px 0 12px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 100%;
+  margin-left: auto;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 12px 0 10px;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.logoLink:hover {
+  background: var(--aws-header-hover);
+}
+
+.logoImage {
+  display: block;
+  height: 20px;
+  width: auto;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.qButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.qButton:hover {
+  background: var(--aws-header-hover);
+}
+
+.qIcon {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.iconButton:hover {
+  background: var(--aws-header-hover);
+  color: #ffffff;
+}
+
+.iconButton svg {
+  display: block;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 720px;
+  height: 32px;
+  background: var(--aws-header-search-bg);
+  border: 1px solid var(--aws-header-search-border);
+  border-radius: 8px;
+  padding: 0 8px 0 10px;
+  gap: 8px;
+  color: #a4a4ad;
+}
+
+.search:focus-within {
+  border-color: #7d8998;
+}
+
+.searchIcon,
+.historyIcon {
+  flex-shrink: 0;
+  color: #a4a4ad;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1;
+  color: #a4a4ad;
+  min-width: 0;
+  padding: 0;
+  font-style: italic;
+}
+
+.searchInput:focus,
+.searchInput:not(:placeholder-shown) {
+  font-style: normal;
+  color: #f1f3f3;
+}
+
+.searchInput::placeholder {
+  color: #a4a4ad;
+  font-style: italic;
+}
+
+.searchInput::-webkit-search-decoration,
+.searchInput::-webkit-search-cancel-button,
+.searchInput::-webkit-search-results-button,
+.searchInput::-webkit-search-results-decoration {
+  display: none;
+}
+
+.shortcut {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #a4a4ad;
+  white-space: nowrap;
+  font-family: inherit;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.historyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #a4a4ad;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.historyButton:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.regionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.regionButton:hover {
+  background: var(--aws-header-hover);
+}
+
+/**
+ * AWS account chrome: gray tab hangs from top of nav,
+ * federated username sits under it in sky blue, right-aligned.
+ */
+.accountMenu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  align-self: stretch;
+  height: 100%;
+  margin-left: 4px;
+  padding-right: 2px;
+  overflow: visible;
+}
+
+.accountPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 0 0 8px 8px;
+  background: #7d8998;
+  color: #151920;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.accountPill:hover,
+.accountPillOpen {
+  background: #8a96a4;
+}
+
+.accountUsername {
+  margin-top: 4px;
+  padding-right: 2px;
+  color: #7ec8e3;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.caret {
+  display: block;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.accountCluster {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  height: 100%;
+}
+
+.moreButton {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.moreButton:hover {
+  background: var(--aws-header-hover);
+}
+
+.mobileOnly {
+  display: none;
+}
+
+.desktopOnly {
+  display: contents;
+}
+
+.accountMenu.desktopOnly {
+  display: flex;
+}
+
+.searchDesktop {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .topNav {
+    height: 48px;
+    padding: 0 4px 0 2px;
+  }
+
+  .center {
+    display: none;
+  }
+
+  .mobileOnly {
+    display: contents;
+  }
+
+  .desktopOnly {
+    display: none !important;
+  }
+
+  .accountMenu.desktopOnly {
+    display: none !important;
+  }
+
+  .moreButton {
+    display: inline-flex;
+  }
+
+  .qButton {
+    width: 36px;
+  }
+
+  .qIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .iconButton {
+    width: 34px;
+  }
+
+  .logoLink {
+    padding: 0 8px 0 6px;
+  }
+
+  .logoImage {
+    height: 18px;
+  }
+
+  .right {
+    position: relative;
+  }
+
+  .divider {
+    height: 18px;
+    margin: 0;
+  }
+
+  .accountCluster {
+    margin-left: 0;
+  }
+}
+
