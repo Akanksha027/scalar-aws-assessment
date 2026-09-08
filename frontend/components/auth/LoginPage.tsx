@@ -68,7 +68,7 @@ export function LoginPage() {
 
       <div className={styles.logoWrap}>
         <Image
-          src="/assets/aws-logo-dark.svg"
+          src="/assets/aws-logo-official.png"
           alt="aws"
           width={84}
           height={51}
