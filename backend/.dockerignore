@@ -1,8 +1,11 @@
 .venv
-data
 __pycache__
-*.py[cod]
-*.egg-info
-.pytest_cache
-.env
+*.pyc
+*.pyo
 .git
+data
+*.db
+.env
+.pytest_cache
+README.md
+RAILWAY.md
