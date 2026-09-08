@@ -20,6 +20,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
         "https://router53.itsakanksha.in",
         "http://router53.itsakanksha.in",
+        "https://aws-clone.vercel.app",
     ]
     cookie_secure: bool = False
     demo_email: str = "admin@example.com"

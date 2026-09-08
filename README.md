@@ -4,6 +4,17 @@ Functional AWS [Route 53](https://us-east-1.console.aws.amazon.com/route53/v2/ho
 
 **Stack:** Next.js (TypeScript) · FastAPI · SQLite · Cloudscape Design System
 
+## Live demo
+
+| | URL |
+|---|---|
+| Frontend | https://aws-clone.vercel.app |
+| Backend API | https://scalar-aws-assessment-production.up.railway.app |
+| API docs | https://scalar-aws-assessment-production.up.railway.app/docs |
+| Health | https://scalar-aws-assessment-production.up.railway.app/health |
+
+Login: `admin@example.com` / `password123`
+
 ## Features
 
 - Mocked authentication (login / logout / httpOnly session cookie)
