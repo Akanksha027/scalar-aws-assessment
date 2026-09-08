@@ -52,6 +52,7 @@ def set_session_cookie(response: Response, session_id: str) -> None:
         value=session_id,
         httponly=True,
         samesite="lax",
+        secure=settings.cookie_secure,
         max_age=settings.session_max_age_seconds,
         path="/",
     )
